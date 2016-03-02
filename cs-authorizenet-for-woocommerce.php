@@ -1,11 +1,13 @@
 <?php
 /*
- * Plugin Name: Authorize.Net for WooCommerce 
- * Plugin URI: https://wordpress.org/plugins/stripe-for-woocommerce
- * Description: Use Authorize.Net for collecting credit card payments on WooCommerce.
+ * Plugin Name: Authorize.Net for WooCommerce - Code Srushti.
+ * Plugin URI: http://codesrushti.com/category/wordpress-plugins
+ * Description: Use this Plugin for collecting credit card payments on WooCommerce System.
  * Version: 1.0
  * Author: Velmurugan Kuberan, Thiyagarajan P & Vinothkumar Parthasarathy
  * Author URI: http://codesrushti.com/category/wordpress-plugins
+ * Requires at least: 3.8
+ * Tested up to: 4.4
  *
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html

@@ -154,7 +154,7 @@ if( !class_exists('CS_AuthorizeNet4WC' )) {
             }
 
             // `_s4wc_capture` added in 1.35, let `capture` last for a few more updates before removing
-            if ( get_post_meta( $order_id, '_s4wc_capture', true ) || get_post_meta( $order_id, 'capture', true ) ) {
+            if ( get_post_meta( $order_id, '_cs_an4wc_capture', true ) || get_post_meta( $order_id, 'capture', true ) ) {
 
                 $order = new WC_Order( $order_id );
                 $params = array(
@@ -168,7 +168,7 @@ if( !class_exists('CS_AuthorizeNet4WC' )) {
                     if ( $charge ) {
                         $order->add_order_note(
                             sprintf(
-                                __( '%s payment captured.', 'stripe-for-woocommerce' ),
+                                __( '%s payment captured.', 'cs-authorizenet-for-woocommerce' ),
                                 get_class( $this )
                             )
                         );
@@ -176,13 +176,13 @@ if( !class_exists('CS_AuthorizeNet4WC' )) {
                         // Save Stripe fee
                         if ( isset( $charge->balance_transaction ) && isset( $charge->balance_transaction->fee ) ) {
                             $stripe_fee = number_format( $charge->balance_transaction->fee / 100, 2, '.', '' );
-                            update_post_meta( $order_id, 'Stripe Fee', $stripe_fee );
+                            update_post_meta( $order_id, 'Authorize.Net Fee', $stripe_fee );
                         }
                     }
                 } catch ( Exception $e ) {
                     $order->add_order_note(
                         sprintf(
-                            __( '%s payment failed to capture. %s', 'stripe-for-woocommerce' ),
+                            __( '%s payment failed to capture. %s', 'cs-authorizenet-for-woocommerce' ),
                             get_class( $this ),
                            $this->get_error_message( $e )
                         )

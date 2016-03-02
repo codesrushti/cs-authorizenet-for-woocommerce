@@ -55,7 +55,7 @@ if( !class_exists('CS_AuthorizeNet_Gateway' )) {
             $this->authorizenet_customer_info = get_user_meta( get_current_user_id(), $csan4wc->settings['cs_an_db_location'], true );
 
             // Add an icon with a filter for customization
-            $icon_url = apply_filters( 'cs_an__icon_url', plugins_url( 'assets/images/credits.png', dirname(__FILE__) ) );
+            $icon_url = apply_filters( 'cs_an_icon_url', plugins_url( 'assets/images/credits.png', dirname(__FILE__) ) );
             if ( $icon_url ) {
                 $this->icon = $icon_url;
             }

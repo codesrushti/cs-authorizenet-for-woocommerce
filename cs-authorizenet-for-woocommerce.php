@@ -11,6 +11,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  *
  * Special thanks to : Stephen Zuniga // http://stephenzuniga.com
+ * Foundation built by: Sean Voss // https://github.com/seanvoss/striper
  */
 
 /*

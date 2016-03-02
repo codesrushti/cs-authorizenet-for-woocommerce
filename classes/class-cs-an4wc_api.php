@@ -4,6 +4,10 @@
  *
  * @class       CS_AuthorizeNet_API
  * @author      Velmurugan Kuberan
+ *
+ * Special thanks to : Stephen Zuniga // http://stephenzuniga.com
+ * Foundation built by: Sean Voss // https://github.com/seanvoss/striper
+ *
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly

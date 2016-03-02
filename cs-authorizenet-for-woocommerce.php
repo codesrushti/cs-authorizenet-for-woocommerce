@@ -196,3 +196,39 @@ if( !class_exists('CS_AuthorizeNet4WC' )) {
 
 	}
 }
+
+$GLOBALS['csan4wc'] = new CS_AuthorizeNet4WC();
+
+/**
+ * Wrapper of wc_get_template to relate directly to s4wc
+ *
+ * @param       string $template_name
+ * @param       array $args
+ * @return      string
+ */
+function cs_an_get_template( $template_name, $args = array() ) {
+    $template_path = WC()->template_path() . '/csan4wc/';
+    $default_path = plugin_dir_path( __FILE__ ) . '/templates/';
+
+    return wc_get_template( $template_name, $args, $template_path, $default_path );
+}
+
+/**
+ * Helper function to find the key of a nested value
+ *
+ * @param       string $needle
+ * @param       array $haystack
+ * @return      mixed
+ */
+if ( ! function_exists( 'cs_an_recursive_array_search' ) ) {
+    function cs_an_recursive_array_search( $needle, $haystack ) {
+
+        foreach ( $haystack as $key => $value ) {
+
+            if ( $needle === $value || ( is_array( $value ) && cs_an_recursive_array_search( $needle, $value ) !== false ) ) {
+                return $key;
+            }
+        }
+        return false;
+    }
+}

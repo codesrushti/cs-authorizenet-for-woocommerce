@@ -23,7 +23,7 @@ if( !class_exists('CS_AuthorizeNet_Gateway' )) {
         protected $transaction_id            = null;
         protected $transaction_error_message = null;
     
-	    public function __construct() {
+        public function __construct() {
             global $csan4wc;
 
             $this->id           = 'csan4wc';
@@ -67,7 +67,7 @@ if( !class_exists('CS_AuthorizeNet_Gateway' )) {
             add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ) );
             add_action( 'woocommerce_credit_card_form_start', array( $this, 'before_cc_form' ) );
             add_action( 'woocommerce_credit_card_form_end', array( $this, 'after_cc_form' ) );
-	    }
+        }
 		
         /**
          * Check if this gateway is enabled and all dependencies are fine.

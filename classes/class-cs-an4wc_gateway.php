@@ -180,7 +180,7 @@ if( !class_exists('CS_AuthorizeNet_Gateway' )) {
                             <div class="error">
                                 <p><?php _e( 'Are you sure you want to delete all test data? This action cannot be undone.', 'cs-authorizenet-for-woocommerce' ); ?></p>
                                 <p>
-                                    <a href="<?php echo wp_nonce_url( admin_url( $options_base . '&action=delete_test_data&confirm=yes' ), 'cs_an4wc_action' ); ?>" class="button"><?php _e( 'Delete', 'cs-authorizenet-for-woocommerce' ); ?></a>
+                                    <a href="<?php echo wp_nonce_url( admin_url( $options_base . '&action=delete_an_test_data&confirm=yes' ), 'cs_an4wc_action' ); ?>" class="button"><?php _e( 'Delete', 'cs-authorizenet-for-woocommerce' ); ?></a>
                                     <a href="<?php echo admin_url( $options_base ); ?>" class="button"><?php _e( 'Cancel', 'cs-authorizenet-for-woocommerce' ); ?></a>
                                 </p>
                             </div>
@@ -193,5 +193,77 @@ if( !class_exists('CS_AuthorizeNet_Gateway' )) {
 		    
         } //function admin_notices ends here
 
+        /**
+         * Initialise Gateway Settings Form Fields
+         *
+         * @access      public
+         * @return      void
+         */
+        public function init_form_fields() {
+            $this->form_fields = array(
+                'enabled' => array(
+                    'type'          => 'checkbox',
+                    'title'         => __( 'Enable/Disable', 'cs-authorizenet-for-woocommerce' ),
+                    'label'         => __( 'Enable Authorize.Net for WooCommerce', 'cs-authorizenet-for-woocommerce' ),
+                    'default'       => 'yes'
+                ),
+                'title' => array(
+                    'type'          => 'text',
+                    'title'         => __( 'Title', 'cs-authorizenet-for-woocommerce' ),
+                    'description'   => __( 'This controls the title which the user sees during checkout.', 'cs-authorizenet-for-woocommerce' ),
+                    'default'       => __( 'Credit Card Payment', 'cs-authorizenet-for-woocommerce' )
+                ),
+                'description' => array(
+                    'type'          => 'textarea',
+                    'title'         => __( 'Description', 'cs-authorizenet-for-woocommerce' ),
+                    'description'   => __( 'This controls the description which the user sees during checkout.', 'cs-authorizenet-for-woocommerce' ),
+                    'default'       => '',
+                ),
+                'charge_type' => array(
+                    'type'          => 'select',
+                    'title'         => __( 'Charge Type', 'cs-authorizenet-for-woocommerce' ),
+                    'description'   => __( 'Choose to capture payment at checkout, or authorize only to capture later.', 'cs-authorizenet-for-woocommerce' ),
+                    'options'       => array(
+                        'capture'   => __( 'Authorize & Capture', 'cs-authorizenet-for-woocommerce' ),
+                        'authorize' => __( 'Authorize Only', 'cs-authorizenet-for-woocommerce' )
+                    ),
+                    'default'       => 'capture'
+                ),
+                'saved_cards' => array(
+                    'type'          => 'checkbox',
+                    'title'         => __( 'Saved Cards', 'cs-authorizenet-for-woocommerce' ),
+                    'description'   => __( 'Allow customers to use saved cards for future purchases.', 'cs-authorizenet-for-woocommerce' ),
+                    'default'       => 'yes',
+                ),
+                'testmode' => array(
+                    'type'          => 'checkbox',
+                    'title'         => __( 'Test Mode', 'cs-authorizenet-for-woocommerce' ),
+                    'description'   => __( 'Use the test mode on Authorize.Net\'s dashboard to verify everything works before going live.', 'cs-authorizenet-for-woocommerce' ),
+                    'label'         => __( 'Turn on testing', 'cs-authorizenet-for-woocommerce' ),
+                    'default'       => 'no'
+                ),
+                'test_login_id'   => array(
+                    'type'          => 'text',
+                    'title'         => __( 'Test Login id', 'cs-authorizenet-for-woocommerce' ),
+                    'default'       => '',
+                ),
+                'test_transaction_key' => array(
+                    'type'          => 'text',
+                    'title'         => __( 'Test Transaction key', 'cs-authorizenet-for-woocommerce' ),
+                    'default'       => '',
+                ),
+                'live_login_id'   => array(
+                    'type'          => 'text',
+                    'title'         => __( 'Live Login id', 'cs-authorizenet-for-woocommerce' ),
+                    'default'       => '',
+                ),
+                'live_transaction_key' => array(
+                    'type'          => 'text',
+                    'title'         => __( 'Live Transaction key', 'cs-authorizenet-for-woocommerce' ),
+                    'default'       => '',
+                ),
+            );
+        }
+		
     } //class ends heree
 }

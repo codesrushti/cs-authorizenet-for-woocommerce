@@ -127,7 +127,7 @@ if( !class_exists('CS_AuthorizeNet_Gateway' )) {
             }
 
             // Authorize.Net won't work without login id and transaction keys (both test and live)
-			if ($csan4wc->settings['testmode'] === 'yes') {
+            if ($csan4wc->settings['testmode'] === 'yes') {
                 if ( ! $csan4wc->settings['test_login_id'] && ! $csan4wc->settings['test_transaction_key'] ) {
                     echo '<div class="error"><p>' . __( 'Authorize.Net needs test login id & transaction keys to work, Please fill those informations.', 'cs-authorizenet-for-woocommerce' ) . '</p></div>';
                     return false;

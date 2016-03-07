@@ -129,12 +129,12 @@ if( !class_exists('CS_AuthorizeNet_Gateway' )) {
             // Authorize.Net won't work without login id and transaction keys (both test and live)
 			if ($csan4wc->settings['testmode'] === 'yes') {
                 if ( ! $csan4wc->settings['test_login_id'] && ! $csan4wc->settings['test_transaction_key'] ) {
-                    echo '<div class="error"><p>' . __( 'Authorize.Net needs test login id & transaction keys to work, Please fill those informations.' ) . '</p></div>';
+                    echo '<div class="error"><p>' . __( 'Authorize.Net needs test login id & transaction keys to work, Please fill those informations.', 'cs-authorizenet-for-woocommerce' ) . '</p></div>';
                     return false;
                 }
             } else {
                 if ( ! $csan4wc->settings['live_login_id'] && ! $csan4wc->settings['live_transaction_key'] ) {
-                    echo '<div class="error"><p>' . __( 'Authorize.Net needs login id & transaction keys to work, Please fill those informations.' ) . '</p></div>';
+                    echo '<div class="error"><p>' . __( 'Authorize.Net needs login id & transaction keys to work, Please fill those informations.', 'cs-authorizenet-for-woocommerce' ) . '</p></div>';
                     return false;
                 }
             }
@@ -152,7 +152,7 @@ if( !class_exists('CS_AuthorizeNet_Gateway' )) {
                 if ( ! empty( $_GET['action'] ) && ! empty( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( $_REQUEST['_wpnonce'], 'cs_an4wc_action' ) ) {
 
                     // Delete all test data
-                    if ( $_GET['action'] === 'delete_test_data' ) {
+                    if ( $_GET['action'] === 'delete_an_test_data' ) {
 
                         // Delete test data if the action has been confirmed
                         if ( ! empty( $_GET['confirm'] ) && $_GET['confirm'] === 'yes' ) {
@@ -193,44 +193,7 @@ if( !class_exists('CS_AuthorizeNet_Gateway' )) {
 		    
         } //function admin_notices ends here
 		
-        /**
-         * Add to the customer profile
-         *
-         * @access      public
-         * @param       WP_User $user
-         * @return      void
-         */
-        public function add_customer_profile( $user ) {
-
-            if ( ! current_user_can( 'manage_woocommerce' ) ) {
-                return;
-            }
-        ?>
-            <table class="form-table">
-                
-                <tr>
-                    <th>Delete Authorize.Net Test Data</th>
-                    <td>
-                        <p>
-                            <a href="<?php echo wp_nonce_url( admin_url( 'profile.php?action=delete_test_data' ), 'cs_an4wc_action' ); ?>" class="button"><?php _e( 'Delete Test Data', 'cs-authorizenet-for-woocommerce' ); ?></a>
-                            <span class="description"><?php _e( '<strong class="red">Warning:</strong> This will delete Authorize.Net test data for this customer, make sure to back up your database.', 'cs-authorizenet-for-woocommerce' ); ?></span>
-                        </p>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <th>Delete Stripe Live Data</th>
-                    <td>
-                        <p>
-                            <a href="<?php echo wp_nonce_url( admin_url( 'profile.php?action=delete_live_data' ), 's4wc_action' ); ?>" class="button"><?php _e( 'Delete Live Data', 'cs-authorizenet-for-woocommerce' ); ?></a>
-                            <span class="description"><?php _e( '<strong class="red">Warning:</strong> This will delete Stripe live data for this customer, make sure to back up your database.', 'cs-authorizenet-for-woocommerce' ); ?></span>
-                        </p>
-                    </td>
-                </tr>
-                
-            </table>
-        <?php
-        }
+        
 
 	} //class ends heree
 }

@@ -192,8 +192,6 @@ if( !class_exists('CS_AuthorizeNet_Gateway' )) {
             }
 		    
         } //function admin_notices ends here
-		
-        
 
-	} //class ends heree
+    } //class ends heree
 }

@@ -84,7 +84,7 @@ if( !class_exists('CS_AuthorizeNet_Gateway' )) {
             }
 
             // Authorize.Net won't work without login id and transaction keys (both test and live)
-			if ($csan4wc->settings['testmode'] === 'yes') {
+            if ($csan4wc->settings['testmode'] === 'yes') {
                 if ( ! $csan4wc->settings['test_login_id'] && ! $csan4wc->settings['test_transaction_key'] ) {
                     return false;
                 }

@@ -90,13 +90,13 @@ if( !class_exists('CS_AuthorizeNet4WC' )) {
             return $methods;
         }
 
-		/**
-		 * Localize AuthorizeNet error messages
-		 *
-		 * @access      protected
-		 * @param       Exception $e
-		 * @return      string
-		 */
+        /**
+         * Localize AuthorizeNet error messages
+         *
+         * @access      protected
+         * @param       Exception $e
+         * @return      string
+         */
         public function get_error_message( $e ) {
 
                 switch ( $e->getMessage() ) {

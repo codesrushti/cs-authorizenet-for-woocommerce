@@ -27,7 +27,7 @@ if( !class_exists('CS_AuthorizeNet_Gateway' )) {
             global $csan4wc;
 
             $this->id           = 'csan4wc';
-            $this->method_title = 'Authorize.Net for WooCommerce';
+            $this->method_title =  __( 'Authorize.Net for WooCommerce', 'cs-authorizenet-for-woocommerce' );
             $this->has_fields   = true;
             $this->supports     = array(
                 'default_credit_card_form',
@@ -188,8 +188,49 @@ if( !class_exists('CS_AuthorizeNet_Gateway' )) {
                         }
                     }
                 }
+				
             }
-		}
+		    
+        } //function admin_notices ends here
+		
+        /**
+         * Add to the customer profile
+         *
+         * @access      public
+         * @param       WP_User $user
+         * @return      void
+         */
+        public function add_customer_profile( $user ) {
 
-	}
+            if ( ! current_user_can( 'manage_woocommerce' ) ) {
+                return;
+            }
+        ?>
+            <table class="form-table">
+                
+                <tr>
+                    <th>Delete Authorize.Net Test Data</th>
+                    <td>
+                        <p>
+                            <a href="<?php echo wp_nonce_url( admin_url( 'profile.php?action=delete_test_data' ), 'cs_an4wc_action' ); ?>" class="button"><?php _e( 'Delete Test Data', 'cs-authorizenet-for-woocommerce' ); ?></a>
+                            <span class="description"><?php _e( '<strong class="red">Warning:</strong> This will delete Authorize.Net test data for this customer, make sure to back up your database.', 'cs-authorizenet-for-woocommerce' ); ?></span>
+                        </p>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th>Delete Stripe Live Data</th>
+                    <td>
+                        <p>
+                            <a href="<?php echo wp_nonce_url( admin_url( 'profile.php?action=delete_live_data' ), 's4wc_action' ); ?>" class="button"><?php _e( 'Delete Live Data', 'cs-authorizenet-for-woocommerce' ); ?></a>
+                            <span class="description"><?php _e( '<strong class="red">Warning:</strong> This will delete Stripe live data for this customer, make sure to back up your database.', 'cs-authorizenet-for-woocommerce' ); ?></span>
+                        </p>
+                    </td>
+                </tr>
+                
+            </table>
+        <?php
+        }
+
+	} //class ends heree
 }

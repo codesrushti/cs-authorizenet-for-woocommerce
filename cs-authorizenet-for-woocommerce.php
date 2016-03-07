@@ -1,8 +1,8 @@
 <?php
 /*
- * Plugin Name: Authorize.Net for WooCommerce - Code Srushti.
+ * Plugin Name: Authorize.Net for WooCommerce
  * Plugin URI: http://codesrushti.com/category/wordpress-plugins
- * Description: Use this Plugin for collecting credit card payments on WooCommerce System.
+ * Description: Use this Plugin for collecting credit card payments on WooCommerce System via Authorize.Net.
  * Version: 1.0
  * Author: Velmurugan Kuberan, Thiyagarajan P & Vinothkumar Parthasarathy
  * Author URI: http://codesrushti.com/category/wordpress-plugins
@@ -60,30 +60,32 @@ if( !class_exists('CS_AuthorizeNet4WC' )) {
             // Localization
             load_plugin_textdomain( 'cs-authorizenet-for-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 			
-		}
+        }
 
-		/**
+        /**
          * Add AuthorizeNet Gateway to WooCommerces list of Gateways
          *
          * @access      public
          * @param       array $methods
          * @return      array
          */
-		public function add_cs_an_gateway( $methods ) {
+        public function add_cs_an_gateway( $methods ) {
             if ( ! class_exists( 'WC_Payment_Gateway' ) ) {
                 return;
             }
 
             // Include payment gateway
             include_once( 'classes/class-cs-an4wc_gateway.php' );
-
-            if ( class_exists( 'WC_Subscriptions_Order' ) ) {
+			
+			//handle subscriptions later
+            /*if ( class_exists( 'WC_Subscriptions_Order' ) ) {
                 include_once( 'classes/class-cs-an4wc_subscriptions_gateway.php' );
 
                 $methods[] = 'CS_AuthorizeNet4WC_Subscriptions_Gateway';
             } else {
                 $methods[] = 'CS_AuthorizeNet4WC_Gateway';
-            }
+            }*/
+            $methods[] = 'CS_AuthorizeNet_Gateway';
 
             return $methods;
         }
@@ -95,9 +97,9 @@ if( !class_exists('CS_AuthorizeNet4WC' )) {
 		 * @param       Exception $e
 		 * @return      string
 		 */
-		public function get_error_message( $e ) {
+        public function get_error_message( $e ) {
 
-				switch ( $e->getMessage() ) {
+                switch ( $e->getMessage() ) {
 
                     // Messages from Stripe API
                     case 'incorrect_number':
@@ -140,8 +142,8 @@ if( !class_exists('CS_AuthorizeNet4WC' )) {
                         $message = __( 'Failed to process the order, please try again later.', 'cs-authorizenet-for-woocommerce' );
 			    }
 
-			    return $message;
-	    }
+                return $message;
+        }
 
         /**
          * Process the captured payment when changing order status to completed
